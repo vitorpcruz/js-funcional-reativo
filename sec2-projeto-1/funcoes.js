@@ -13,6 +13,11 @@ function lerDiretorio(caminho) {
   });
 }
 
+function elementosTerminadosCom(array, extensaoArquivo) {
+  return array.filter((el) => el.endsWith(extensaoArquivo));
+}
+
 module.exports = {
   lerDiretorio,
+  elementosTerminadosCom,
 };
