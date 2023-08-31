@@ -53,11 +53,15 @@ function removerElementosSeApenasNumeros(array) {
 function removerSimbolos(simbolos) {
   return (array) => {
     return array.map((el) => {
-      let textoSemSimbolos = el;
-      simbolos.forEach((simbolo) => {
-        textoSemSimbolos = textoSemSimbolos.split(simbolo).join("");
-      });
-      return textoSemSimbolos;
+      return simbolos.reduce((acc, simbolo) => {
+        return acc.split(simbolo).join("");
+      }, el);
+
+      // let textoSemSimbolos = el;
+      // simbolos.forEach((simbolo) => {
+      //   textoSemSimbolos = textoSemSimbolos.split(simbolo).join("");
+      // });
+      // return textoSemSimbolos;
     });
   };
 }
