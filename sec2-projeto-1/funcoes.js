@@ -13,8 +13,11 @@ function lerDiretorio(caminho) {
   });
 }
 
-function elementosTerminadosCom(array, extensaoArquivo) {
-  return array.filter((el) => el.endsWith(extensaoArquivo));
+function elementosTerminadosCom(extensaoArquivo) {
+  return (array) => {
+    let resultado = array.filter((el) => el.endsWith(extensaoArquivo));
+    return resultado;
+  };
 }
 
 function lerArquivo(caminho) {
@@ -32,8 +35,31 @@ function lerArquivos(caminhos) {
   return Promise.all(caminhos.map(lerArquivo));
 }
 
-function removerSeVazio(array) {
+function removerElementosSeVazio(array) {
   return array.filter((el) => el.trim());
+}
+
+function removerElementosSeIncluir(padraoTextual) {
+  return (array) => array.filter((el) => !el.includes(padraoTextual));
+}
+
+function removerElementosSeApenasNumeros(array) {
+  return array.filter((el) => {
+    const num = parseInt(el.trim());
+    return num !== num;
+  });
+}
+
+function removerSimbolos(simbolos) {
+  return (array) => {
+    return array.map((el) => {
+      let textoSemSimbolos = el;
+      simbolos.forEach((simbolo) => {
+        textoSemSimbolos = textoSemSimbolos.split(simbolo).join("");
+      });
+      return textoSemSimbolos;
+    });
+  };
 }
 
 module.exports = {
@@ -41,5 +67,8 @@ module.exports = {
   elementosTerminadosCom,
   lerArquivo,
   lerArquivos,
-  removerSeVazio,
+  removerElementosSeVazio,
+  removerElementosSeIncluir,
+  removerElementosSeApenasNumeros,
+  removerSimbolos,
 };
