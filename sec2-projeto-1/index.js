@@ -33,5 +33,6 @@ fn.lerDiretorio(caminho)
   .then(fn.removerElementosSeVazio)
   .then(fn.removerElementosSeApenasNumeros)
   .then(fn.agruparElementos)
+  .then(fn.ordernarPorAtribNumero("qtde", "desc"))
   //.then()
   .then(console.log);
