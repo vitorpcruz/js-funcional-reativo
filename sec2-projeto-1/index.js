@@ -4,7 +4,6 @@ const fn = require("./funcoes");
 const simbolos = [
   ".",
   "?",
-  "- ",
   "-",
   ",",
   '"',
@@ -19,15 +18,20 @@ const simbolos = [
   ")",
 ];
 
+function agruparPalavras() {}
+
 const caminho = path.join(__dirname, "./legendas");
 fn.lerDiretorio(caminho)
   .then(fn.elementosTerminadosCom(".srt"))
   .then(fn.lerArquivos)
-  .then((conteudos) => conteudos.join("\n"))
-  .then((todoConteudo) => todoConteudo.split("\n"))
+  .then(fn.mesclarElementos)
+  .then(fn.separarTextoPor("\n"))
   .then(fn.removerElementosSeVazio)
   .then(fn.removerElementosSeIncluir("-->"))
   .then(fn.removerElementosSeApenasNumeros)
   .then(fn.removerSimbolos(simbolos))
+  .then(fn.mesclarElementos)
+  .then(fn.separarTextoPor(" "))
+  .then(fn.removerElementosSeVazio)
   //.then()
   .then(console.log);
